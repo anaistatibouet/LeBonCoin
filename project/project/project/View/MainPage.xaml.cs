@@ -7,11 +7,19 @@ using Xamarin.Forms;
 
 namespace project
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
+        public partial class MainPage : ContentPage
         {
-            InitializeComponent();
+            public MainPage()
+            {
+                InitializeComponent();
+                if (Application.Current.Properties.ContainsKey("pseudo"))
+                {
+
+                }
+                else
+                {
+                    Navigation.PushAsync(new View.Connexion());
+                }
+            }
         }
     }
-}
