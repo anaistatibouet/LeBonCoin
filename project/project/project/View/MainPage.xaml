@@ -5,8 +5,8 @@
              x:Class="project.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Page d'accueil" />
+        <Image Source="logo.png" HeightRequest="50"/>
+        <Label Text="Liste des annonces" Margin="10" FontAttributes="Bold"/>
     </StackLayout>
 
 </ContentPage>
