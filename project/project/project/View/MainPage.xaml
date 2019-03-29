@@ -7,6 +7,14 @@
     <StackLayout>
         <Image Source="logo.png" HeightRequest="50"/>
         <Label Text="Liste des annonces" Margin="10" FontAttributes="Bold"/>
-    </StackLayout>
+        
+        <!--Liste des annonces-->
+        <ListView ItemsSource="{}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
 
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>
