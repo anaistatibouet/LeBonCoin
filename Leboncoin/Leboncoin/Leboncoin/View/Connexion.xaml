@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Leboncoin.View.Connexion">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="pseudo"/>
+            <Entry x:Name="Pseudo" Placeholder="Pseudo"/>
+            <Label Text="mot de passe"/>
+            <Entry x:Name="Password" Placeholder="Password"/>
+            <Button x:Name="OK" Text="value" Clicked="Login"/>
+            <Button Text="S'inscrire" Clicked="VersInscription"/>
+        </StackLayout>
+       
+    </ContentPage.Content>
+</ContentPage>
