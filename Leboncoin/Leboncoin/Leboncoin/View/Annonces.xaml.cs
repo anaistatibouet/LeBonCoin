@@ -15,7 +15,7 @@ namespace Leboncoin.View
 		public Annonces ()
 		{
 			InitializeComponent ();
-            listeAnnonces.ItemsSource = Model.AnnonceModel.LesAnnonces();
+            listeAnnonces.ItemsSource = Model.AnnonceModel.LesAnnonces(1);
             //BindingContext = new Model.AnnonceModel();
         }
 	}

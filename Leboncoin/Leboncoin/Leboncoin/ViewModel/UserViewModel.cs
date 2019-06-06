@@ -74,7 +74,7 @@ namespace Leboncoin.ViewModel
         public static ObservableCollection<Model.UserModel> GetUsers()
         {
             ObservableCollection<Model.UserModel> deuxusers = new ObservableCollection<Model.UserModel>();
-            deuxusers = ListUser;
+            
 
             //requete a la bdd 
             Model.UserModel u = new Model.UserModel()

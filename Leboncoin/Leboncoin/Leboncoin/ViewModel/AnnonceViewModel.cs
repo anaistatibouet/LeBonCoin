@@ -27,6 +27,22 @@ namespace Leboncoin.ViewModel
           
             
         }
+        //Cette fonction return les annonces qui ne sont pas a l'utilisateur
+        public static ObservableCollection<Model.AnnonceModel> AnnonceSaufMoi(int iduser)
+        {
+            ObservableCollection<Model.AnnonceModel> toutesannonces = new ObservableCollection<Model.AnnonceModel>();
+            ObservableCollection<Model.AnnonceModel> pasmesnannonces = new ObservableCollection<Model.AnnonceModel>();
+            toutesannonces = getAnnonces();
+            foreach(Model.AnnonceModel annonce in toutesannonces)
+            {
+                if(annonce.User.ID != iduser)
+                {
+                    pasmesnannonces.Add(annonce);
+                }
+            }
+            return pasmesnannonces;
+        }
+
 
         public static ObservableCollection<Model.AnnonceModel> getAnnonces()
         {
@@ -53,7 +69,7 @@ namespace Leboncoin.ViewModel
                 Prix = 25,
                 Tel = 0682344200,
                 Categorie = CategorieViewModel.GetCategorieParId(2),
-                User = UserViewModel.GetUserParId(3)
+                User = UserViewModel.GetUserParId(2)
 
             };
             deuxannonces.Add(a);

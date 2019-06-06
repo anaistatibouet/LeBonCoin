@@ -16,9 +16,9 @@ namespace Leboncoin.Model
         public UserModel User { get; set; }
 
 
-        public static ObservableCollection<Model.AnnonceModel> LesAnnonces()
+        public static ObservableCollection<Model.AnnonceModel> LesAnnonces(int iduser)
         {
-            return ViewModel.AnnonceViewModel.getAnnonces();
+            return ViewModel.AnnonceViewModel.AnnonceSaufMoi(iduser);
         }
 
     }
