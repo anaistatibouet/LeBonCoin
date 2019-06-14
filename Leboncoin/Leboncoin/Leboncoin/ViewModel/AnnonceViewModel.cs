@@ -1,82 +1,80 @@
-﻿using System;
+﻿using Leboncoin.DAL;
+using Leboncoin.Model;
+using Leboncoin.View;
+using Plugin.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Leboncoin.ViewModel
 {
-    class AnnonceViewModel : SimpleObservableObject
+    public class AnnonceViewModel : SimpleObservableObject
     {
-        private static ObservableCollection<Model.AnnonceModel> _listAnnonce;
-        public static ObservableCollection<Model.AnnonceModel> ListAnnonce { get; set; }
 
-
-        private int _id;
-        private string _title;
-        private string _description;
-        private int _prix;
-        private int _tel;
-        private Model.CategorieModel _categorie;
-        private Model.UserModel _user;
-        //pour l'instant on stock les id avant de creer les objets en entier et de les stocker
-
-
-
-        public AnnonceViewModel()
+        private ObservableCollection<CategorieModel> _liste_categories;
+        public ObservableCollection<CategorieModel> Liste_Categories
         {
-          
-            
+            get { return _liste_categories; }
+            set { Set(ref _liste_categories, value); }
         }
-        //Cette fonction return les annonces qui ne sont pas a l'utilisateur
-        public static ObservableCollection<Model.AnnonceModel> AnnonceSaufMoi(int iduser)
+
+        private ObservableCollection<UserModel> _liste_utilisateurs;
+        public ObservableCollection<UserModel> Liste_Utilisateurs
         {
-            ObservableCollection<Model.AnnonceModel> toutesannonces = new ObservableCollection<Model.AnnonceModel>();
-            ObservableCollection<Model.AnnonceModel> pasmesnannonces = new ObservableCollection<Model.AnnonceModel>();
-            toutesannonces = getAnnonces();
-            foreach(Model.AnnonceModel annonce in toutesannonces)
+            get { return _liste_utilisateurs; }
+            set { Set(ref _liste_utilisateurs, value); }
+        }
+
+        private AnnonceModel _annonce;
+        public AnnonceModel Annonce
+        {
+            get { return _annonce; }
+            set { Set(ref _annonce, value); }
+        }
+
+        private UserModel _utilisateur;
+        public UserModel Utilisateur
+        {
+            get { return _utilisateur; }
+            set { Set(ref _utilisateur, value);  }
+        }
+
+        private CategorieModel categorie;
+        public CategorieModel Categorie
+        {
+            get { return categorie; }
+            set { Set(ref categorie, value); }
+        }
+
+        public INavigation Navigation { get; set; }
+
+        public AnnonceViewModel(INavigation nav, AnnonceModel a)
+        {
+            this.Navigation = nav;
+            this.Annonce = a;
+
+            var conn = DependencyService.Get<IDbConnection>().DbConnection();
+            Liste_Categories = new ObservableCollection<CategorieModel>((IList<CategorieModel>)conn.Query<CategorieModel>("Select * from [Categorie] where ID=?", Annonce.CategorieId).ToList());
+            Categorie = Liste_Categories[0];
+
+            Liste_Utilisateurs = new ObservableCollection<UserModel>((IList<UserModel>)conn.Query<UserModel>("Select * from [User] where ID=?", Annonce.UserId).ToList());
+            Utilisateur = Liste_Utilisateurs[0];
+
+        }
+
+        private Command _composerNum;
+        public Command ComposerNum => _composerNum
+            ??
+            (_composerNum = new Command( () =>
             {
-                if(annonce.User.ID != iduser)
-                {
-                    pasmesnannonces.Add(annonce);
-                }
+                var PhoneCallTask = CrossMessaging.Current.PhoneDialer;
+                if (PhoneCallTask.CanMakePhoneCall)
+                    PhoneCallTask.MakePhoneCall(Annonce.Tel.ToString());
             }
-            return pasmesnannonces;
-        }
-
-
-        public static ObservableCollection<Model.AnnonceModel> getAnnonces()
-        {
-            ObservableCollection<Model.AnnonceModel> deuxannonces = new ObservableCollection<Model.AnnonceModel>();
-
-
-            //requete a la bdd 
-            Model.AnnonceModel a = new Model.AnnonceModel()
-            {
-                ID = 1,
-                Title = "oui",
-                Description = "Desc1",
-                Prix = 10,
-                Tel = 0682344200,
-                Categorie = CategorieViewModel.GetCategorieParId(1),
-                User = UserViewModel.GetUserParId(1)
-
-            };
-            Model.AnnonceModel a2 = new Model.AnnonceModel()
-            {
-                ID = 2,
-                Title = "non",
-                Description = "Desc2",
-                Prix = 25,
-                Tel = 0682344200,
-                Categorie = CategorieViewModel.GetCategorieParId(2),
-                User = UserViewModel.GetUserParId(2)
-
-            };
-            deuxannonces.Add(a);
-            deuxannonces.Add(a2);
-            return deuxannonces;
-
-        }
-
+            ));
+      
     }
 }

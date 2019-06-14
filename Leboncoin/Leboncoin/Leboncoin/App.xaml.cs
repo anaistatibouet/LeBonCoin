@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Leboncoin.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace Leboncoin
         {
             InitializeComponent();
             
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new Connexion());
         }
 
         protected override void OnStart()

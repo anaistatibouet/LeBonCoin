@@ -12,7 +12,7 @@ namespace Leboncoin.DAL
     {
         public SQLiteConnection DbConnection()
         {
-            var dbname = "leboncoin.db";
+            var dbname = "leboncoin_database";
             var path = Path.Combine(System.Environment.
                 GetFolderPath(System.Environment.
                 SpecialFolder.Personal), dbname);

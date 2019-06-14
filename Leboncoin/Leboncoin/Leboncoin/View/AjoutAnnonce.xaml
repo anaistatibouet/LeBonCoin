@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Leboncoin.View.AjoutAnnonce"
+             Title="Ajout Annonce">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Titre" Text="{Binding Titre}"/>
+            <Entry Placeholder="Description" Text="{Binding Description}"/>
+            <Entry Placeholder="Prix" Keyboard="Numeric" Text="{Binding Prix}"/>
+            <Entry Placeholder="Tel" Keyboard="Telephone" Text="{Binding Tel}"/>
+            <Picker ItemsSource="{Binding Liste_Categories}" ItemDisplayBinding="{Binding Nom}" SelectedIndex="{Binding CategorieId}"/>
+            <Button Text="Enregistrer" Command="{Binding AjouterAnnonce}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

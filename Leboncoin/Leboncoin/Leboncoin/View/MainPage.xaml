@@ -2,16 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Leboncoin"
-             x:Class="Leboncoin.MainPage">
-
+             x:Class="Leboncoin.MainPage"
+             xmlns:b="clr-namespace:Leboncoin.DAL"
+             Title="Le Bon Coin">
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-
-
-        <Button Text="vers annonce" Clicked="VersAnnonces"/>
+        <Entry Text="{Binding Recherche}" Placeholder="Rechercher une annonce" ReturnCommand="{Binding RechercherAnnonce}"/>
+        <ListView ItemsSource="{Binding Liste_Annonces}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Titre}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemSelected" Command="{Binding Annonce}" CommandParameter="{Binding Path=SelectedItem}"/>
+            </ListView.Behaviors>
+        </ListView>
+        <Button Text="Accéder à mes annonces" Command="{Binding MesAnnonces}"/>
+        <Button Text="Ajouter une annonce" Command="{Binding AjoutAnnonce}" />
     </StackLayout>
 
 </ContentPage>

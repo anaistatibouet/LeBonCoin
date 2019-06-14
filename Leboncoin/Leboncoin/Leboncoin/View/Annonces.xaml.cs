@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Leboncoin.Model;
+using Leboncoin.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +14,10 @@ namespace Leboncoin.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Annonces : ContentPage
 	{
-		public Annonces ()
+		public Annonces(AnnonceModel annonce)
 		{
-			InitializeComponent ();
-            listeAnnonces.ItemsSource = Model.AnnonceModel.LesAnnonces(1);
-            //BindingContext = new Model.AnnonceModel();
+			InitializeComponent();
+            BindingContext = new AnnonceViewModel(Navigation, annonce);
         }
 	}
 }

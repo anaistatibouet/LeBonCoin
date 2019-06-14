@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,18 +44,17 @@ namespace Leboncoin.Model
             set { _login = value; }
         }
 
-        private int _password;
+        private int _mdp;
 
         [MaxLength(6), NotNull]
-        public int Password
+        public int Mdp
         {
-            get { return _password; }
-            set { _password = value; }
+            get { return _mdp; }
+            set { _mdp = value; }
         }
 
-        public static ObservableCollection<UserModel> LesUsers()
-        {
-            return ViewModel.UserViewModel.GetUsers();
-        }
+        [OneToMany]
+        public List<AnnonceModel> AnnonceUser { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,6 @@ namespace Leboncoin.Model
     {
 
         private int _id;
-
         [PrimaryKey, AutoIncrement]
         public int ID
         {
@@ -20,7 +20,6 @@ namespace Leboncoin.Model
         }
 
         private string _titre;
-
         [MaxLength(50), NotNull]
         public string Titre {
             get { return _titre; }
@@ -28,7 +27,7 @@ namespace Leboncoin.Model
         }
 
         private string _description;
-
+        [NotNull]
         public string Description
         {
             get { return _description; }
@@ -36,7 +35,6 @@ namespace Leboncoin.Model
         }
 
         private double _prix;
-
         [NotNull]
         public double Prix
         {
@@ -44,43 +42,25 @@ namespace Leboncoin.Model
             set { _prix = value; }
         }
 
-        private string _date;
-
-        [NotNull]
-        public string Date
-        {
-            get { return _date; }
-            set { _date = value; }
-        }
-
         private int _tel;
-
         [NotNull]
         public int Tel {
             get { return _tel; }
             set { _tel = value; }
         }
 
-        private CategorieModel _categorie;
-
-        [NotNull]
-        public CategorieModel Categorie {
-            get { return _categorie; }
-            set { _categorie = value; }
+        private int _categorieId;
+        [ForeignKey(typeof(CategorieModel)), NotNull]
+        public int CategorieId {
+            get { return _categorieId; }
+            set { _categorieId = value; }
         }
 
-        private UserModel _user;
-
-        [NotNull]
-        public UserModel User {
-            get { return _user; }
-            set { _user = value; }
-        }
-
-
-        public static ObservableCollection<Model.AnnonceModel> LesAnnonces(int iduser)
-        {
-            return ViewModel.AnnonceViewModel.AnnonceSaufMoi(iduser);
+        private int _userId;
+        [ForeignKey(typeof(UserModel)), NotNull]
+        public int UserId {
+            get { return _userId; }
+            set { _userId = value; }
         }
 
     }

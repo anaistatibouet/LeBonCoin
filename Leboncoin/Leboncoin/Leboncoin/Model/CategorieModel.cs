@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,9 +27,8 @@ namespace Leboncoin.Model
             set { _nom = value; }
         }
 
-        public static ObservableCollection<CategorieModel> LesAnnonces()
-        {
-            return ViewModel.CategorieViewModel.GetCategories();
-        }
+        [OneToMany]
+        public List<AnnonceModel> AnnonceCategorie { get; set; }
+
     }
 }

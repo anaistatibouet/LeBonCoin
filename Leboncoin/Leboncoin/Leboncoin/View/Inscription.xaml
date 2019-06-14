@@ -1,22 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Leboncoin.View.Inscription">
+             x:Class="Leboncoin.View.Inscription"
+             Title="Inscription">
     <ContentPage.Content>
         <StackLayout>
-
-           
-            <Entry x:Name="ID" Placeholder="ID"/>
-            
-            <Entry x:Name="Nom" Placeholder="Nom"/>
-          
-            <Entry x:Name="Prenom" Placeholder="Prenom"/>
-            
-            <Entry x:Name="Login" Placeholder="Login"/>
-         
-            <Entry x:Name="Password" Placeholder="Password"/>
-            <Button x:Name="OK" Text="OK" Clicked="InscriptionUser"/>
-            <Button Text="Se connecter" Clicked="VersConnexion"/>
+            <Entry Placeholder="Nom" Text="{Binding Nom}"/>
+            <Entry Placeholder="Prenom" Text="{Binding Prenom}"/>
+            <Entry Placeholder="Login" Text="{Binding Login}"/>
+            <Entry Placeholder="Mot de passe" Keyboard="Numeric" Text="{Binding MotDePasse}"/>
+            <Button Text="Inscription" Command="{Binding Inscription}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

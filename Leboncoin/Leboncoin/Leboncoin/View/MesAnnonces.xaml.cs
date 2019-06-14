@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Leboncoin.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Inscription : ContentPage
+	public partial class MesAnnonces : ContentPage
 	{
-		public Inscription()
+		public MesAnnonces ()
 		{
-			InitializeComponent();
-            this.BindingContext = new InscriptionViewModel(Navigation);
+			InitializeComponent ();
+            this.BindingContext = new MesAnnoncesViewModel(Navigation);
 		}
 	}
 }

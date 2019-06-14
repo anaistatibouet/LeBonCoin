@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Leboncoin.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Inscription : ContentPage
+	public partial class AjoutAnnonce : ContentPage
 	{
-		public Inscription()
+		public AjoutAnnonce ()
 		{
-			InitializeComponent();
-            this.BindingContext = new InscriptionViewModel(Navigation);
+			InitializeComponent ();
+            this.BindingContext = new AjoutAnnonceViewModel(Navigation);
 		}
 	}
 }
